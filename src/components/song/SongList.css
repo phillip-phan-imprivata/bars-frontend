@@ -1,0 +1,12 @@
+footer {
+    position:sticky;
+    bottom: 0
+}
+
+.song__thumbnail {
+    cursor: pointer
+}
+
+.song {
+    display: flex;
+}
