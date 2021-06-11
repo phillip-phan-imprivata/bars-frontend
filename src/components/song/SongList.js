@@ -1,14 +1,30 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { SongContext } from "./SongProvider"
 import "./SongList.css"
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
+import { PlaylistContext } from "../playlist/PlaylistProvider"
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 export const SongList = () => {
     const {songs, getSongs} = useContext(SongContext)
+    const {playlists, getPlaylists, addSongToPlaylist} = useContext(PlaylistContext)
+
     const [searchQuery, setSearchQuery] = useState("")
     const [videoLink, setVideoLink] = useState("")
+    const [newSong, setNewSong] = useState({
+        "songLink": "",
+        "title": "",
+        "channel": "",
+        "thumbnail": ""
+    })
+
+    useEffect(() => {
+        getPlaylists()
+    }, [])
 
     const handleSearchChange = (event) => {
         let newSearch = searchQuery
@@ -25,12 +41,13 @@ export const SongList = () => {
         if (videoLink !== ""){
             return(
                 <iframe 
-                    width="175"
+                    width="375"
                     height="100" 
                     src={`https://www.youtube.com/embed/${videoLink}?autoplay=1`}
                     title="YouTube Video"
                     autoPlay="On"
-                    allow="autoplay"></iframe>
+                    allow="autoplay"
+                    allowFullScreen></iframe>
             )
         }
     }
@@ -39,6 +56,41 @@ export const SongList = () => {
         const [id, videoId] = event.target.id.split("--")
         setVideoLink(videoId)
     }
+
+    const songDetails = (song) => {
+        let songDetail = {...newSong}
+        songDetail.songLink = song.songLink
+        songDetail.title = song.title
+        songDetail.channel = song.channel
+        songDetail.thumbnail = song.thumbnail
+
+        setNewSong(songDetail)
+    }
+    
+    const addSong = (event) => {
+        const [prefix, id] = event.target.id.split("--")
+
+        let songDetail = {...newSong}
+        songDetail.playlistId = parseInt(id)
+        addSongToPlaylist(songDetail)
+    }
+
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">Playlists</Popover.Title>
+          <Popover.Content>
+            <ListGroup defaultActiveKey="#link1">
+                {
+                    playlists.map(playlist => {
+                        return(
+                            <ListGroup.Item action key={playlist.id} className="playlist__name" id={`id--${playlist.id}`} onClick={addSong}>{playlist.name}</ListGroup.Item>
+                            )
+                    })
+                }
+            </ListGroup>
+          </Popover.Content>
+        </Popover>
+      )
 
     return(
         <section className="songList">
@@ -63,8 +115,22 @@ export const SongList = () => {
                         <div className="song" key={song.etag}>
                             <div className="song__thumbnail"><img src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} /></div>
                             <div className="song__info">
-                                <div className="song__title">{song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`)}</div>
+                                <div className="song__title">{song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
                                 <div className="song__channelTitle">{song.snippet.channelTitle}</div>
+                            </div>
+                            <div className="song__playlist">
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true}>
+                                <Button 
+                                variant="success" 
+                                onClick={event=>songDetails(
+                                    {
+                                        "songLink": song.id.videoId,
+                                        "title": song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&"),
+                                        "channel": song.snippet.channelTitle,
+                                        "thumbnail": song.snippet.thumbnails.default.url
+                                    }
+                                    )}>Add to Playlist</Button>
+                            </OverlayTrigger>
                             </div>
                         </div>
                     )

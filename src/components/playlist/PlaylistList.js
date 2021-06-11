@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from "react-router-dom"
 
 export const PlaylistList = () => {
     const {playlists, getPlaylists, createPlaylist} = useContext(PlaylistContext)
@@ -69,7 +70,7 @@ export const PlaylistList = () => {
                 playlists.map(playlist => {
                     return (
                         <div className="playlist" key={playlist.id}>
-                            <div className="playlist__name">{playlist.name}</div>
+                            <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                         </div>
                     )
                 })
