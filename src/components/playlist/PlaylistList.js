@@ -5,9 +5,12 @@ import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link } from "react-router-dom"
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 export const PlaylistList = () => {
-    const {playlists, getPlaylists, createPlaylist} = useContext(PlaylistContext)
+    const {playlists, getPlaylists, createPlaylist, deletePlaylist} = useContext(PlaylistContext)
     const [show, setShow] = useState(false)
     const [newPlaylist, setNewPlaylist] = useState("")
 
@@ -37,8 +40,27 @@ export const PlaylistList = () => {
         handleHide()
     }
 
+    const handleDeletePlaylist = (event) => {
+        const [prefix, id] = event.target.id.split("--")
+
+        deletePlaylist(id)
+    }
+
+    const popover = (playlistId) => {
+        return (
+        <Popover id="popover-basic">
+          <Popover.Content>
+            <ListGroup defaultActiveKey="#link1">
+                <ListGroup.Item action className="playlist__delete" id={`id--${playlistId}`} onClick={handleDeletePlaylist}>Delete Playlist</ListGroup.Item>
+            </ListGroup>
+          </Popover.Content>
+        </Popover>
+        )
+    }
+
     return (
         <section className="playlists">
+            <div className="playlists__title">Playlists</div>
             <Button onClick={handleShow} variant="primary">Create</Button>
             <Modal show={show} onHide={handleHide} animation={false}>
                 <Modal.Header closeButton>
@@ -71,6 +93,9 @@ export const PlaylistList = () => {
                     return (
                         <div className="playlist" key={playlist.id}>
                             <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover(playlist.id)} rootClose={true}>
+                                <Button variant="success">Options</Button>
+                            </OverlayTrigger>
                         </div>
                     )
                 })

@@ -10,10 +10,13 @@ import { SongProvider } from "./song/SongProvider"
 export const ApplicationViews = () => {
     return (
         <>
-            {/* Render the location list when http://localhost:3000/ */}
-            <Route exact path="/">
-                <Home />
-            </Route>
+            <PlaylistProvider>
+            <SongProvider>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+            </SongProvider>
+            </PlaylistProvider>
 
             <PlaylistProvider>
             <SongProvider>

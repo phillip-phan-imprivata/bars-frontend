@@ -1,16 +1,25 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { PlaylistContext } from "./PlaylistProvider"
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
 
 export const PlaylistDetail = () => {
-    const {playlistSongs, getSongsByPlaylist} = useContext(PlaylistContext)
+    const {playlistSongs, getSongsByPlaylist, editPlaylistName, removeSongFromPlaylist} = useContext(PlaylistContext)
     const [videoLink, setVideoLink] = useState("")
+    const [hidden, setHidden] = useState(false)
+    const [buttonText, setButtonText] = useState("Edit")
+    const [newPlaylistName, setNewPlaylistName] = useState("")
 
     const {playlistId} = useParams()
 
     useEffect(() => {
         getSongsByPlaylist(playlistId)
     }, [])
+
+    const currentPlaylist = playlistSongs.find(ps => ps.playlist)?.playlist
 
     const renderVideo = () => {
         if (videoLink !== ""){
@@ -32,8 +41,51 @@ export const PlaylistDetail = () => {
         setVideoLink(videoId)
     }
 
+    const handleEditPlaylist = (event) => {
+        event.preventDefault()
+        setHidden(!hidden)
+        if (buttonText === "Edit"){
+            setButtonText("Save")
+        } else if (buttonText === "Save"){
+            editPlaylistName({
+                "playlistId": currentPlaylist?.id,
+                "name": newPlaylistName
+            })
+            setButtonText("Edit")
+        }
+    }
+
+    const handleInputChange = (event) => {
+        let newName = newPlaylistName
+        newName = event.target.value
+        setNewPlaylistName(newName)
+    }
+
+    const handleRemoveSong = (event) => {
+        const [prefix, id] = event.target.id.split("--")
+        removeSongFromPlaylist({
+            "playlistId": currentPlaylist.id,
+            "songId": parseInt(id)
+        })
+    }
+
+    const popover = (songId) => {
+        return (
+        <Popover id="popover-basic">
+          <Popover.Content>
+            <ListGroup defaultActiveKey="#link1">
+                <ListGroup.Item action className="playlist__remove" id={`id--${songId}`} onClick={handleRemoveSong}>Remove Song</ListGroup.Item>
+            </ListGroup>
+          </Popover.Content>
+        </Popover>
+        )
+    }
+
     return (
         <section className="playlistSongs">
+            <div className="playlistName" hidden={hidden}>{currentPlaylist?.name}</div>
+            <input type="text" className="playlistNameInput" hidden={!hidden} value={newPlaylistName} placeholder={currentPlaylist?.name} onChange={handleInputChange} />
+            <button className="playlistEdit" onClick={handleEditPlaylist}>{buttonText}</button>
             {
                 playlistSongs.map(ps => {
                     return (
@@ -43,6 +95,9 @@ export const PlaylistDetail = () => {
                                 <div className="song__title">{ps.song.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
                                 <div className="song__channelTitle">{ps.song.channel}</div>
                             </div>
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover(ps.song.id)} rootClose={true}>
+                                <Button variant="success">Options</Button>
+                            </OverlayTrigger>
                         </div>
                     )
                 })
