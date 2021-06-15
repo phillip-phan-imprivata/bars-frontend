@@ -4,7 +4,7 @@ export const PlaylistContext = createContext()
 
 export const PlaylistProvider = (props) => {
     const [playlists, setPlaylists] = useState([])
-    const [playlistSongs, setPlaylistSongs] = useState([])
+    const [currentPlaylist, setCurrentPlaylist] = useState({})
 
     const getPlaylists = () => {
         return fetch("http://localhost:8000/playlists", {
@@ -45,7 +45,7 @@ export const PlaylistProvider = (props) => {
             }
         })
         .then(res=>res.json())
-        .then(setPlaylistSongs)
+        .then(setCurrentPlaylist)
     }
 
     const addSongToPlaylist = (obj) => {
@@ -86,7 +86,7 @@ export const PlaylistProvider = (props) => {
     return (
         <PlaylistContext.Provider value={{
             playlists, getPlaylists, createPlaylist, 
-            getSongsByPlaylist, playlistSongs, addSongToPlaylist, 
+            getSongsByPlaylist, currentPlaylist, addSongToPlaylist, 
             removeSongFromPlaylist, editPlaylistName, deletePlaylist
         }}>
             {props.children}

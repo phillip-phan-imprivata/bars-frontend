@@ -42,7 +42,6 @@ export const PlaylistList = () => {
 
     const handleDeletePlaylist = (event) => {
         const [prefix, id] = event.target.id.split("--")
-
         deletePlaylist(id)
     }
 
@@ -51,7 +50,7 @@ export const PlaylistList = () => {
         <Popover id="popover-basic">
           <Popover.Content>
             <ListGroup defaultActiveKey="#link1">
-                <ListGroup.Item action className="playlist__delete" id={`id--${playlistId}`} onClick={handleDeletePlaylist}>Delete Playlist</ListGroup.Item>
+                <ListGroup.Item action className="playlist__delete" id={`id--${playlistId}`} onClick={handleDeletePlaylist}>Delete</ListGroup.Item>
             </ListGroup>
           </Popover.Content>
         </Popover>
