@@ -50,7 +50,7 @@ export const PlaylistList = () => {
         <Popover id="popover-basic">
           <Popover.Content>
             <ListGroup defaultActiveKey="#link1">
-                <ListGroup.Item action className="playlist__delete" id={`id--${playlistId}`} onClick={handleDeletePlaylist}>Delete</ListGroup.Item>
+                <ListGroup.Item action className="playlist__delete" id={`id--${playlistId}`} onClick={handleDeletePlaylist}>Delete Playlist</ListGroup.Item>
             </ListGroup>
           </Popover.Content>
         </Popover>
