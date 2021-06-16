@@ -11,7 +11,7 @@ export const PlaylistDetail = () => {
     const [videoLink, setVideoLink] = useState("")
     const [hidden, setHidden] = useState(false)
     const [buttonText, setButtonText] = useState("Options")
-    const [newPlaylistName, setNewPlaylistName] = useState(currentPlaylist.name)
+    const [newPlaylistName, setNewPlaylistName] = useState("")
     
     const {playlistId} = useParams()
 
