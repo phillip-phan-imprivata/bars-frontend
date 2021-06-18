@@ -114,7 +114,7 @@ export const PlaylistDetail = () => {
                                 <div className="song__title">{ps.song.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
                                 <div className="song__channelTitle">{ps.song.channel}</div>
                             </div>
-                            <OverlayTrigger trigger="click" placement="right" overlay={songsPopover(ps.song.id)} rootClose={true} flip={false}>
+                            <OverlayTrigger trigger="click" placement="right" overlay={songsPopover(ps.song.id)} rootClose={true} transition={false} animation={null}>
                                 <Button variant="success">Options</Button>
                             </OverlayTrigger>
                         </div>

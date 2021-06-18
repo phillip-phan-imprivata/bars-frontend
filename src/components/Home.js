@@ -92,7 +92,7 @@ export const Home = () => {
                                 <div className="song__channelTitle">{song.snippet.channelTitle}</div>
                             </div>
                             <div className="song__playlist">
-                            <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true}>
+                            <OverlayTrigger trigger="click" placement="right" rootClose={true} transition={false} animation={null} overlay={popover}>
                                 <Button 
                                 variant="success" 
                                 onClick={event=>songDetails(
