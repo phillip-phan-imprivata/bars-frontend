@@ -22,6 +22,8 @@ export const SongList = () => {
         "thumbnail": ""
     })
 
+    const songQueue = []
+
     useEffect(() => {
         getPlaylists()
     }, [])
@@ -39,7 +41,7 @@ export const SongList = () => {
 
     const renderVideo = () => {
         if (videoLink !== ""){
-            return(
+            let player = (
                 <iframe 
                     width="375"
                     height="100" 
@@ -47,8 +49,10 @@ export const SongList = () => {
                     title="YouTube Video"
                     autoPlay="On"
                     allow="autoplay"
-                    allowFullScreen></iframe>
+                    allowFullScreen
+                    />
             )
+            return player
         }
     }
 
@@ -97,6 +101,7 @@ export const SongList = () => {
             <InputGroup className="mb-3">
                 <FormControl
                 placeholder="Search"
+                className="searchBar"
                 aria-label="Search"
                 aria-describedby="basic-addon2"
                 id="search"
@@ -111,6 +116,7 @@ export const SongList = () => {
             </InputGroup>
             {
                 songs.map(song => {
+                    songQueue.push(song.id.videoId)
                     return(
                         <div className="song" key={song.etag}>
                             <div className="song__thumbnail"><img src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} /></div>
@@ -119,10 +125,10 @@ export const SongList = () => {
                                 <div className="song__channelTitle">{song.snippet.channelTitle}</div>
                             </div>
                             <div className="song__playlist">
-                            <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true}>
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true} transition={false} animation={null}>
                                 <Button 
                                 variant="success" 
-                                onClick={event=>songDetails(
+                                onClick={()=>songDetails(
                                     {
                                         "songLink": song.id.videoId,
                                         "title": song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&"),

@@ -92,7 +92,7 @@ export const PlaylistList = () => {
                     return (
                         <div className="playlist" key={playlist.id}>
                             <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
-                            <OverlayTrigger trigger="click" placement="right" overlay={popover(playlist.id)} rootClose={true}>
+                            <OverlayTrigger trigger="click" placement="right" overlay={popover(playlist.id)} rootClose={true} transition={false} animation={null}>
                                 <Button variant="success">Options</Button>
                             </OverlayTrigger>
                         </div>

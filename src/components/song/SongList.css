@@ -10,3 +10,9 @@ footer {
 .song {
     display: flex;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+}
