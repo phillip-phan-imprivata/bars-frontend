@@ -1,5 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { Footer } from "./footer/Footer"
 import { Home } from "./Home"
 import { PlaylistDetail } from "./playlist/PlaylistDetail"
 import { PlaylistList } from "./playlist/PlaylistList"
@@ -14,6 +15,7 @@ export const ApplicationViews = () => {
             <SongProvider>
                 <Route exact path="/">
                     <Home />
+                    <Footer />
                 </Route>
             </SongProvider>
             </PlaylistProvider>
@@ -22,18 +24,23 @@ export const ApplicationViews = () => {
             <SongProvider>
                 <Route exact path="/search">
                     <SongList />
+                    <Footer />
                 </Route>
             </SongProvider>
             </PlaylistProvider>
 
+            <SongProvider>
             <PlaylistProvider>
                 <Route exact path="/playlists">
                     <PlaylistList />
+                    <Footer />
                 </Route>
                 <Route exact path="/playlists/:playlistId(\d+)">
                     <PlaylistDetail />
+                    <Footer />
                 </Route>
             </PlaylistProvider>
+            </SongProvider>
         </>
     )
 }

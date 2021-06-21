@@ -8,6 +8,8 @@ import { Link } from "react-router-dom"
 import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import ListGroup from 'react-bootstrap/ListGroup'
+import "./PlaylistList.css"
+import kebabMenu from "../images/kebab-menu.png"
 
 export const PlaylistList = () => {
     const {playlists, getPlaylists, createPlaylist, deletePlaylist} = useContext(PlaylistContext)
@@ -60,7 +62,7 @@ export const PlaylistList = () => {
     return (
         <section className="playlists">
             <div className="playlists__title">Playlists</div>
-            <Button onClick={handleShow} variant="primary">Create</Button>
+            <Button onClick={handleShow} className="newPlaylistButton" variant="outline-light">+</Button>
             <Modal show={show} onHide={handleHide} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -93,7 +95,7 @@ export const PlaylistList = () => {
                         <div className="playlist" key={playlist.id}>
                             <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                             <OverlayTrigger trigger="click" placement="right" overlay={popover(playlist.id)} rootClose={true} transition={false} animation={null}>
-                                <Button variant="success">Options</Button>
+                                <Button variant="outline-light" className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
                             </OverlayTrigger>
                         </div>
                     )

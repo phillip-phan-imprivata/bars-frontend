@@ -5,6 +5,10 @@ import Popover from 'react-bootstrap/Popover'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
+import kebabMenu from "../images/kebab-menu.png"
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
+import "./PlaylistDetail.css"
 
 export const PlaylistDetail = () => {
     const {currentPlaylist, getSongsByPlaylist, editPlaylistName, removeSongFromPlaylist, deletePlaylist} = useContext(PlaylistContext)
@@ -100,11 +104,27 @@ export const PlaylistDetail = () => {
     return (
         <section className="playlistSongs">
             <div className="playlistName" hidden={hidden}>{currentPlaylist.name}</div>
-            <input type="text" className="playlistNameInput" hidden={!hidden} value={newPlaylistName} placeholder={currentPlaylist.name} onChange={handleInputChange} />
+            <InputGroup className="mb-3">
+                <FormControl
+                placeholder={currentPlaylist.name}
+                className="playlistNameInput"
+                aria-label="Search"
+                aria-describedby="basic-addon2"
+                id="playlistNameInput"
+                value={newPlaylistName}
+                onKeyDown={event => event.key === "Enter" ? handleEditPlaylist(event) : <></>}
+                onChange={handleInputChange}
+                autoComplete="off"
+                hidden={!hidden}
+                />
+                <InputGroup.Append>
+                <Button variant="outline-light" className="saveButton" hidden={!hidden} onClick={handleEditPlaylist}>Save</Button>
+                </InputGroup.Append>
+            </InputGroup>
+            
             <OverlayTrigger trigger="click" placement="right" overlay={playlistPopover} rootClose={true}>
-                <Button variant="primary" hidden={hidden}>Options</Button>
+                <Button variant="outline-light" hidden={hidden} className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
             </OverlayTrigger>
-            <Button variant="primary" hidden={!hidden} onClick={handleEditPlaylist}>Save</Button>
             {
                 currentPlaylist.songs?.map(ps => {
                     return (
@@ -115,7 +135,7 @@ export const PlaylistDetail = () => {
                                 <div className="song__channelTitle">{ps.song.channel}</div>
                             </div>
                             <OverlayTrigger trigger="click" placement="right" overlay={songsPopover(ps.song.id)} rootClose={true} transition={false} animation={null}>
-                                <Button variant="success">Options</Button>
+                                <Button variant="outline-light" className="optionsButton" ><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
                             </OverlayTrigger>
                         </div>
                     )

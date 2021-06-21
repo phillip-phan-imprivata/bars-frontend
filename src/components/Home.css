@@ -1,0 +1,42 @@
+.songList__title{
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+}
+
+.song {
+    margin: 5px auto;
+    padding: 10px;
+    border-bottom: 1px solid #A2A7A5;
+    justify-content: space-between;
+    width: 75vmax;
+}
+
+.song__container {
+    display: flex;
+}
+
+.addButton {
+    padding: 5px 10px;
+    margin: 10px;
+}
+
+.song__info {
+    padding: 10px;
+}
+
+.song__title {
+    font-weight: bold;
+}
+
+.song__channelTitle {
+    font-size: small;
+}
+
+.song__playlist {
+    padding: 10px;
+}
+
+.popover-header {
+    color: #000
+}
