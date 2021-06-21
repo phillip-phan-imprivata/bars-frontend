@@ -14,7 +14,6 @@ export const PlaylistDetail = () => {
     const {currentPlaylist, getSongsByPlaylist, editPlaylistName, removeSongFromPlaylist, deletePlaylist} = useContext(PlaylistContext)
     const [videoLink, setVideoLink] = useState("")
     const [hidden, setHidden] = useState(false)
-    const [buttonText, setButtonText] = useState("Options")
     const [newPlaylistName, setNewPlaylistName] = useState("")
     
     const {playlistId} = useParams()
@@ -48,14 +47,28 @@ export const PlaylistDetail = () => {
 
     const handleEditPlaylist = (event) => {
         setHidden(!hidden)
-        if (buttonText === "Options"){
-            setButtonText("Save")
-        } else if (buttonText === "Save"){
+        if (newPlaylistName !== ""){
             editPlaylistName({
                 "playlistId": currentPlaylist.id,
                 "name": newPlaylistName
             })
-            setButtonText("Options")
+            setNewPlaylistName("")
+        }
+    }
+
+    const handleEditKeyPress = (event) => {
+        if (event.key === "Enter"){
+            setHidden(!hidden)
+            if (newPlaylistName !== ""){
+                editPlaylistName({
+                    "playlistId": currentPlaylist.id,
+                    "name": newPlaylistName
+                })
+            }
+            setNewPlaylistName("")
+        } else if (event.key === "Escape"){
+            setHidden(!hidden)
+            setNewPlaylistName("")
         }
     }
 
@@ -109,24 +122,36 @@ export const PlaylistDetail = () => {
                     <Button variant="outline-light" hidden={hidden} className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
                 </OverlayTrigger>
             </div>
-
-            <InputGroup className="mb-3">
-                <FormControl
-                placeholder={currentPlaylist.name}
-                className="playlistNameInput"
-                aria-label="Search"
-                aria-describedby="basic-addon2"
-                id="playlistNameInput"
-                value={newPlaylistName}
-                onKeyDown={event => event.key === "Enter" ? handleEditPlaylist(event) : <></>}
-                onChange={handleInputChange}
-                autoComplete="off"
-                hidden={!hidden}
-                />
-                <InputGroup.Append>
-                <Button variant="outline-light" className="saveButton" hidden={!hidden} onClick={handleEditPlaylist}>Save</Button>
-                </InputGroup.Append>
-            </InputGroup>
+            <div className="playlistNameInput">
+                <InputGroup className="mb-3">
+                    <FormControl
+                    placeholder={currentPlaylist.name}
+                    className="playlistNameInput"
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    id="playlistNameInput"
+                    value={newPlaylistName}
+                    onKeyDown={handleEditKeyPress}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    hidden={!hidden}
+                    />
+                    <InputGroup.Append>
+                    <Button 
+                        variant="outline-light" 
+                        className="cancelButton" 
+                        hidden={!hidden} 
+                        onClick={() => {
+                            setHidden(!hidden)
+                            setNewPlaylistName("")
+                            }
+                        }>Cancel</Button>
+                    </InputGroup.Append>
+                    <InputGroup.Append>
+                    <Button variant="outline-light" className="saveButton" hidden={!hidden} onClick={handleEditPlaylist}>Save</Button>
+                    </InputGroup.Append>
+                </InputGroup>
+            </div>
             
             {
                 currentPlaylist.songs?.map(ps => {
