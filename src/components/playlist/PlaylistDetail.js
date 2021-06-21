@@ -103,7 +103,13 @@ export const PlaylistDetail = () => {
 
     return (
         <section className="playlistSongs">
-            <div className="playlistName" hidden={hidden}>{currentPlaylist.name}</div>
+            <div className="playlistNameContainer">
+                <div className="playlistName" hidden={hidden}>{currentPlaylist.name}</div>
+                <OverlayTrigger trigger="click" placement="right" overlay={playlistPopover} rootClose={true}>
+                    <Button variant="outline-light" hidden={hidden} className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
+                </OverlayTrigger>
+            </div>
+
             <InputGroup className="mb-3">
                 <FormControl
                 placeholder={currentPlaylist.name}
@@ -122,9 +128,6 @@ export const PlaylistDetail = () => {
                 </InputGroup.Append>
             </InputGroup>
             
-            <OverlayTrigger trigger="click" placement="right" overlay={playlistPopover} rootClose={true}>
-                <Button variant="outline-light" hidden={hidden} className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
-            </OverlayTrigger>
             {
                 currentPlaylist.songs?.map(ps => {
                     return (

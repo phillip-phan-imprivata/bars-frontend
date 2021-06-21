@@ -61,7 +61,7 @@ export const PlaylistList = () => {
 
     return (
         <section className="playlists">
-            <div className="playlists__title">Playlists</div>
+            <div className="playlists__title">Your Playlists</div>
             <Button onClick={handleShow} className="newPlaylistButton" variant="outline-light">+</Button>
             <Modal show={show} onHide={handleHide} animation={false}>
                 <Modal.Header closeButton>
@@ -93,7 +93,9 @@ export const PlaylistList = () => {
                 playlists.map(playlist => {
                     return (
                         <div className="playlist" key={playlist.id}>
-                            <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                            <div className="playlistName">
+                                <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                            </div>
                             <OverlayTrigger trigger="click" placement="right" overlay={popover(playlist.id)} rootClose={true} transition={false} animation={null}>
                                 <Button variant="outline-light" className="optionsButton"><img src={kebabMenu} alt="Options Menu Button" className="optionsImg" /></Button>
                             </OverlayTrigger>
