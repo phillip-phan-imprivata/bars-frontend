@@ -10,11 +10,10 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 export const SongList = () => {
-    const {songs, getSongs} = useContext(SongContext)
+    const {songs, getSongs, setVideoLink} = useContext(SongContext)
     const {playlists, getPlaylists, addSongToPlaylist} = useContext(PlaylistContext)
 
     const [searchQuery, setSearchQuery] = useState("")
-    const [videoLink, setVideoLink] = useState("")
     const [newSong, setNewSong] = useState({
         "songLink": "",
         "title": "",
@@ -37,23 +36,6 @@ export const SongList = () => {
     const handleSearchClick = (event) => {
         event.preventDefault()
         getSongs(searchQuery)
-    }
-
-    const renderVideo = () => {
-        if (videoLink !== ""){
-            let player = (
-                <iframe 
-                    width="375"
-                    height="100" 
-                    src={`https://www.youtube.com/embed/${videoLink}?autoplay=1`}
-                    title="YouTube Video"
-                    autoPlay="On"
-                    allow="autoplay"
-                    allowFullScreen
-                    />
-            )
-            return player
-        }
     }
 
     const playVideo = (event) => {
@@ -111,7 +93,7 @@ export const SongList = () => {
                 autoComplete="off"
                 />
                 <InputGroup.Append>
-                <Button variant="outline-secondary" className="searchButton" onClick={handleSearchClick}>Submit</Button>
+                <Button variant="outline-light" className="searchButton" onClick={handleSearchClick}>Submit</Button>
                 </InputGroup.Append>
             </InputGroup>
             {
@@ -119,15 +101,17 @@ export const SongList = () => {
                     songQueue.push(song.id.videoId)
                     return(
                         <div className="song" key={song.etag}>
-                            <div className="song__thumbnail"><img src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} /></div>
-                            <div className="song__info">
-                                <div className="song__title">{song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
-                                <div className="song__channelTitle">{song.snippet.channelTitle}</div>
+                            <div className="song__container">
+                                <div className="song__thumbnail"><img src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} /></div>
+                                <div className="song__info">
+                                    <div className="song__title">{song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
+                                    <div className="song__channelTitle">{song.snippet.channelTitle}</div>
+                                </div>
                             </div>
                             <div className="song__playlist">
                             <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true} transition={false} animation={null}>
                                 <Button 
-                                variant="success" 
+                                variant="outline-light" 
                                 onClick={()=>songDetails(
                                     {
                                         "songLink": song.id.videoId,
@@ -135,14 +119,13 @@ export const SongList = () => {
                                         "channel": song.snippet.channelTitle,
                                         "thumbnail": song.snippet.thumbnails.default.url
                                     }
-                                    )}>Add to Playlist</Button>
+                                    )}>+</Button>
                             </OverlayTrigger>
                             </div>
                         </div>
                     )
                 })
             }
-            <footer className="currentSong">{renderVideo()}</footer>
         </section>
     )
 }

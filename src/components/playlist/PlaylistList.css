@@ -1,0 +1,26 @@
+.playlist__link {
+    color: #ffffff
+}
+
+.playlist__link:hover {
+    color: #ffffff
+}
+
+.optionsImg {
+    height: 20px;
+    width: 20px;
+}
+
+.optionsButton {
+    padding: 1px 0;
+    margin: 10px
+}
+
+.newPlaylistButton {
+    padding: 5px 10px;
+    margin: 10px
+}
+
+.modal-content {
+    background-color: #A2A7A5;
+}

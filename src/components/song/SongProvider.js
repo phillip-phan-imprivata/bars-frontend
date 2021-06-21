@@ -4,6 +4,7 @@ export const SongContext = createContext()
 
 export const SongProvider = (props) => {
     const [songs, setSongs] = useState([])
+    const [videoLink, setVideoLink] = useState("")
 
     const getSongs = (search) => {
         return fetch(`http://localhost:8000/songs?search=${search}`, {
@@ -17,7 +18,7 @@ export const SongProvider = (props) => {
 
     return(
         <SongContext.Provider value={{
-            songs, getSongs
+            songs, getSongs, videoLink, setVideoLink
         }}>
             {props.children}
         </SongContext.Provider>
