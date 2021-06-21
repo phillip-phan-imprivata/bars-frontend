@@ -33,8 +33,13 @@
     margin: 10px;
     color: black !important;
     border: 0 !important;
+    font-size: 25px !important;
 }
 
 .modal-content {
     background-color: #A2A7A5;
+}
+
+.playlistName {
+    padding: 10px;
 }
