@@ -12,7 +12,7 @@ import "./PlaylistList.css"
 import kebabMenu from "../images/kebab-menu.png"
 
 export const PlaylistList = () => {
-    const {playlists, getPlaylists, createPlaylist, deletePlaylist} = useContext(PlaylistContext)
+    const {playlists, getPlaylists, createPlaylist, deletePlaylist, getSongsByPlaylist, currentPlaylist} = useContext(PlaylistContext)
     const [show, setShow] = useState(false)
     const [newPlaylist, setNewPlaylist] = useState("")
 
@@ -93,6 +93,31 @@ export const PlaylistList = () => {
                 playlists.map(playlist => {
                     return (
                         <div className="playlist" key={playlist.id}>
+                                {
+                                    getSongsByPlaylist(playlist.id)
+                                    .then(() => (
+                                        <div className="playlistPreview">
+                                            <div className="playlistPreviewRow">
+                                                {
+                                                    currentPlaylist.songs?.slice(0,2).map(ps => {
+                                                        return <div className="playlistPreviewColumn">
+                                                            <img src={ps.song.thumbnail} alt={`song ${ps.song.id} thumbnail`} />
+                                                        </div>
+                                                    })
+                                                }
+                                            </div>
+                                            <div className="playlistPreviewRow">
+                                                {
+                                                    currentPlaylist.songs?.slice(2,4).map(ps => {
+                                                        return <div className="playlistPreviewColumn">
+                                                            <img src={ps.song.thumbnail} alt={`song ${ps.song.id} thumbnail`} />
+                                                        </div>
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    ))
+                                }
                             <div className="playlistName">
                                 <Link className="playlist__link" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                             </div>
