@@ -23,3 +23,7 @@ select:focus {
     outline: none;
 }
 
+.searchContainer {
+    width: 650px;
+    margin: auto;
+}

@@ -1,7 +1,19 @@
+.playlistName {
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+}
+
 .playlistNameContainer {
     display: flex;
+    justify-content: center;
 }
 
 .playlistName {
     padding: 10px;
+}
+
+.playlistNameInput {
+    width: 650px;
+    margin: auto;
 }
