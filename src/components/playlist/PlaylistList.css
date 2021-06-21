@@ -1,3 +1,13 @@
+.playlists__title {
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+}
+
+.playlist {
+    display: flex;
+}
+
 .playlist__link {
     color: #ffffff
 }
@@ -13,12 +23,16 @@
 
 .optionsButton {
     padding: 1px 0;
-    margin: 10px
+    margin: 10px;
+    color: black !important;
+    border: 0 !important;
 }
 
 .newPlaylistButton {
     padding: 5px 10px;
-    margin: 10px
+    margin: 10px;
+    color: black !important;
+    border: 0 !important;
 }
 
 .modal-content {

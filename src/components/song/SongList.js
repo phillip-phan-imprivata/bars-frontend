@@ -80,6 +80,7 @@ export const SongList = () => {
 
     return(
         <section className="songList">
+            <div className="searchTitle">Search Songs</div>
             <InputGroup className="mb-3">
                 <FormControl
                 placeholder="Search"
@@ -112,6 +113,7 @@ export const SongList = () => {
                             <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose={true} transition={false} animation={null}>
                                 <Button 
                                 variant="outline-light" 
+                                className="addButton"
                                 onClick={()=>songDetails(
                                     {
                                         "songLink": song.id.videoId,

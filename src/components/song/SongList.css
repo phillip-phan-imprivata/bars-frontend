@@ -3,6 +3,12 @@ footer {
     bottom: 0
 }
 
+.searchTitle {
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+}
+
 .song__thumbnail {
     cursor: pointer
 }

@@ -1,0 +1,7 @@
+.playlistNameContainer {
+    display: flex;
+}
+
+.playlistName {
+    padding: 10px;
+}

@@ -19,6 +19,8 @@
 .addButton {
     padding: 5px 10px;
     margin: 10px;
+    color: black !important;
+    border: 0 !important
 }
 
 .song__info {
