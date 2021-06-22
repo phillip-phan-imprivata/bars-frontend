@@ -26,7 +26,10 @@ export const Home = () => {
     const playVideo = (event) => {
         const [id, videoId] = event.target.id.split("--")
         setVideoLink(videoId)
+<<<<<<< HEAD
+=======
         console.log(videoId)
+>>>>>>> main
     }
 
     const songDetails = (song) => {
