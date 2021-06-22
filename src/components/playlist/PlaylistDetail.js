@@ -43,6 +43,7 @@ export const PlaylistDetail = () => {
     const playVideo = (event) => {
         const [id, videoId] = event.target.id.split("--")
         setVideoLink(videoId)
+        console.log(videoId)
     }
 
     const handleEditPlaylist = (event) => {
@@ -178,7 +179,6 @@ export const PlaylistDetail = () => {
                     )
                 })
             }
-            <footer className="currentSong">{renderVideo()}</footer>
         </section>
     )
 }
