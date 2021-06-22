@@ -25,9 +25,7 @@ export const ApplicationViews = () => {
                 <Route exact path="/playlists/:playlistId(\d+)">
                     <PlaylistDetail />
                 </Route>
-                <Route path="/">
-                    <Footer />
-                </Route>
+                <Footer />
             </SongProvider>
             </PlaylistProvider>
         </>
