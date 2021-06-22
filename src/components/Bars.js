@@ -4,8 +4,6 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-import { Footer } from "./footer/Footer"
-import { SongProvider } from "./song/SongProvider"
 import "./Bars.css"
 
 export const Bars = () => {
