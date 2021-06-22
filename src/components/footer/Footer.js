@@ -10,8 +10,8 @@ export const Footer = () => {
         if (link !== ""){
             return (
                 <iframe 
-                    width="375"
-                    height="100" 
+                    width="175"
+                    height="175" 
                     src={`https://www.youtube.com/embed/${link}?autoplay=1`}
                     title="YouTube Video"
                     autoPlay="On"
