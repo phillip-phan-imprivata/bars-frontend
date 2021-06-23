@@ -1,19 +1,70 @@
-.playlists__title {
+.playlists {
+    display: flex;
+    justify-content: space-around;
+}
+
+.playlistsList__title {
     font-weight: bolder;
     font-size: 30px;
     text-align: center;
+    margin: 20px;
 }
 
 .playlist {
     display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #8a817c;
+}
+
+.playlistInfoContainer {
+    display: flex;
 }
 
 .playlist__link {
-    color: #ffffff
+    color: #000
 }
 
 .playlist__link:hover {
-    color: #bcb8b1
+    color: #fff
+}
+
+.playlistPreviewImg1,
+.playlistPreviewImg2,
+.playlistPreviewImg3,
+.playlistPreviewImg4 {
+    height: 44px;
+    width: 74px;
+    pointer-events: none;
+}
+
+.playlistPreviewImg1 {
+    border-top-left-radius: 5px;
+}
+
+.playlistPreviewImg2 {
+    border-top-right-radius: 5px;
+}
+
+.playlistPreviewImg3 {
+    border-bottom-left-radius: 5px;
+}
+
+.playlistPreviewImg4 {
+    border-bottom-right-radius: 5px;
+}
+
+.playlistPreview {
+    height: 90px;
+    width: 150px;
+    background-color: #000;
+    border-radius: 5px;
+    border: 1px solid #8a817c;
+    border-bottom: none;
 }
 
 .optionsImg {
@@ -34,6 +85,9 @@
     color: black !important;
     border: 0 !important;
     font-size: 25px !important;
+    width: 150px;
+    height: 150px;
+    background-color: #8a817c;
 }
 
 .modal-content {

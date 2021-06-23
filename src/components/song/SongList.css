@@ -10,6 +10,7 @@ footer {
     font-weight: bolder;
     font-size: 30px;
     text-align: center;
+    margin: 20px;
 }
 
 .song__thumbnail {
@@ -20,6 +21,10 @@ footer {
     display: flex;
 }
 
+.song__thumbnail {
+    border-radius: 5px;
+}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -28,5 +33,5 @@ select:focus {
 
 .searchContainer {
     width: 650px;
-    margin: auto;
+    margin: 20px auto;
 }

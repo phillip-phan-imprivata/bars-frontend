@@ -105,7 +105,7 @@ export const SongList = () => {
                     return(
                         <div className="song" key={song.etag}>
                             <div className="song__container">
-                                <div className="song__thumbnail"><img src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} /></div>
+                                <img className="song__thumbnail" src={song.snippet.thumbnails.default.url} alt="thumbnail" id={`id--${song.id.videoId}`} onClick={playVideo} />
                                 <div className="song__info">
                                     <div className="song__title">{song.snippet.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
                                     <div className="song__channelTitle">{song.snippet.channelTitle}</div>

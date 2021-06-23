@@ -164,7 +164,7 @@ export const PlaylistDetail = () => {
                     return (
                         <div className="song" key={ps.id}>
                             <div className="song__container">
-                                <div className="song__thumbnail"><img src={ps.song.thumbnail} alt="thumbnail" id={`id--${ps.song.song_link}`} onClick={playVideo} /></div>
+                                <img className="song__thumbnail" src={ps.song.thumbnail} alt="thumbnail" id={`id--${ps.song.song_link}`} onClick={playVideo} />
                                 <div className="song__info">
                                     <div className="song__title">{ps.song.title.replace(/&#39;/g, "'").replace(/&quot;/g, `"`).replace(/&amp;/g, "&")}</div>
                                     <div className="song__channelTitle">{ps.song.channel}</div>
