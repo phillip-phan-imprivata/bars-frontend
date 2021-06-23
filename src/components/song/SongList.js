@@ -81,22 +81,24 @@ export const SongList = () => {
     return(
         <section className="songList">
             <div className="searchTitle">Search Songs</div>
-            <InputGroup className="mb-3">
-                <FormControl
-                placeholder="Search"
-                className="searchBar"
-                aria-label="Search"
-                aria-describedby="basic-addon2"
-                id="search"
-                value={searchQuery}
-                onKeyDown={event => event.key === "Enter" ? handleSearchClick(event) : <></>}
-                onChange={handleSearchChange}
-                autoComplete="off"
-                />
-                <InputGroup.Append>
-                <Button variant="outline-light" className="searchButton" onClick={handleSearchClick}>Submit</Button>
-                </InputGroup.Append>
-            </InputGroup>
+            <div className="searchContainer">
+                <InputGroup className="mb-3">
+                    <FormControl
+                    placeholder="Search"
+                    className="searchBar"
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    id="search"
+                    value={searchQuery}
+                    onKeyDown={event => event.key === "Enter" ? handleSearchClick(event) : <></>}
+                    onChange={handleSearchChange}
+                    autoComplete="off"
+                    />
+                    <InputGroup.Append>
+                    <Button variant="outline-light" className="searchButton" onClick={handleSearchClick}>Submit</Button>
+                    </InputGroup.Append>
+                </InputGroup>
+            </div>
             {
                 songs.map(song => {
                     songQueue.push(song.id.videoId)

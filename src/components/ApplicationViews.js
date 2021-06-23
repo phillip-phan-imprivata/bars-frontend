@@ -15,32 +15,19 @@ export const ApplicationViews = () => {
             <SongProvider>
                 <Route exact path="/">
                     <Home />
-                    <Footer />
                 </Route>
-            </SongProvider>
-            </PlaylistProvider>
-
-            <PlaylistProvider>
-            <SongProvider>
                 <Route exact path="/search">
                     <SongList />
-                    <Footer />
                 </Route>
-            </SongProvider>
-            </PlaylistProvider>
-
-            <SongProvider>
-            <PlaylistProvider>
                 <Route exact path="/playlists">
                     <PlaylistList />
-                    <Footer />
                 </Route>
                 <Route exact path="/playlists/:playlistId(\d+)">
                     <PlaylistDetail />
-                    <Footer />
                 </Route>
-            </PlaylistProvider>
+                <Footer />
             </SongProvider>
+            </PlaylistProvider>
         </>
     )
 }

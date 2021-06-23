@@ -1,7 +1,31 @@
-.playlistNameContainer {
-    display: flex;
+.playlistTitle {
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
 }
 
-.playlistName {
+.playlistNameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playlistNameInput {
+    width: 650px;
+    margin: auto;
+}
+
+.playlistSongCount {
+    text-align: center;
+}
+
+.optionsButton {
+    height: 30px;
     padding: 10px;
+}
+
+.optionsContainer {
+    display: flex;
+    align-items: center;
 }

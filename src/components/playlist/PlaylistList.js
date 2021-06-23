@@ -84,7 +84,7 @@ export const PlaylistList = () => {
                     <Button variant="secondary" onClick={handleHide}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handlePlaylistSave}>
+                    <Button variant="secondary" onClick={handlePlaylistSave}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

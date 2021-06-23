@@ -7,9 +7,9 @@
 .song {
     margin: 5px auto;
     padding: 10px;
-    border-bottom: 1px solid #A2A7A5;
+    border-bottom: 1px solid #8a817c;
     justify-content: space-between;
-    width: 75vmax;
+    width: 70vmax;
 }
 
 .song__container {
@@ -17,10 +17,11 @@
 }
 
 .addButton {
-    padding: 5px 10px;
+    padding: 10px;
     margin: 10px;
     color: black !important;
-    border: 0 !important
+    border: 0 !important;
+    font-size: 25px !important;
 }
 
 .song__info {
