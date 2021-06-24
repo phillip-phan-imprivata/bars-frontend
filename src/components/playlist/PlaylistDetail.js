@@ -9,10 +9,11 @@ import kebabMenu from "../images/kebab-menu.png"
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import "./PlaylistDetail.css"
+import { SongContext } from "../song/SongProvider"
 
 export const PlaylistDetail = () => {
     const {currentPlaylist, getSongsByPlaylist, editPlaylistName, removeSongFromPlaylist, deletePlaylist} = useContext(PlaylistContext)
-    const [videoLink, setVideoLink] = useState("")
+    const {setVideoLink} = useContext(SongContext)
     const [hidden, setHidden] = useState(false)
     const [newPlaylistName, setNewPlaylistName] = useState("")
     
@@ -24,26 +25,9 @@ export const PlaylistDetail = () => {
         getSongsByPlaylist(playlistId)
     }, [])
     
-
-    const renderVideo = () => {
-        if (videoLink !== ""){
-            return(
-                <iframe 
-                    width="375"
-                    height="100" 
-                    src={`https://www.youtube.com/embed/${videoLink}?autoplay=1`}
-                    title="YouTube Video"
-                    autoPlay="On"
-                    allow="autoplay"
-                    allowFullScreen></iframe>
-            )
-        }
-    }
-
     const playVideo = (event) => {
         const [id, videoId] = event.target.id.split("--")
         setVideoLink(videoId)
-        console.log(videoId)
     }
 
     const handleEditPlaylist = (event) => {
