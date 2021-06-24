@@ -3,12 +3,13 @@
     font-size: 30px;
     text-align: center;
     margin: 20px;
+    color: #f4f3ee;
 }
 
 .song {
     margin: 5px auto;
     padding: 10px;
-    border-bottom: 1px solid #8a817c;
+    border-bottom: 1px solid #e0afa0;
     justify-content: space-between;
     width: 70vmax;
 }

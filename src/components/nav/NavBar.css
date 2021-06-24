@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .navbar__item {
@@ -14,10 +14,15 @@ li {
 }
 
 .nav-link {
-    color: #ffffff;
+    color: #f4f3ee;
     font-size: 20px;
 }
   
 .nav-link:hover {
-    color: #bcb8b1
+    color: #e0afa0
+}
+
+.logoImg {
+    height: 100px;
+    width: 100px;
 }
