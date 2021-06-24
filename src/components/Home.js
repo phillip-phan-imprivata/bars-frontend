@@ -8,7 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import "./Home.css"
 
 export const Home = () => {
-    const {songs, getSongs, setVideoLink, videoLink} = useContext(SongContext)
+    const {songs, getSongs, setVideoLink} = useContext(SongContext)
     const {playlists, getPlaylists, addSongToPlaylist} = useContext(PlaylistContext)
 
     const [newSong, setNewSong] = useState({

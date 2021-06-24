@@ -10,6 +10,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import ListGroup from 'react-bootstrap/ListGroup'
 import "./PlaylistList.css"
 import kebabMenu from "../images/kebab-menu.png"
+import defaultPlaylist from "../images/defaultPlaylist.png"
 
 export const PlaylistList = () => {
     const {playlists, getPlaylists, createPlaylist, deletePlaylist, getSongsByPlaylist, currentPlaylist} = useContext(PlaylistContext)
@@ -92,7 +93,7 @@ export const PlaylistList = () => {
         } else if (playlist.songs.length === 0){
             return (
                 <div className="playlistPreviewNoImg">
-                    {playlist.name}
+                    <img src={defaultPlaylist} alt={'default playlist img'} className="playlistDefault" />
                 </div>
             )
         }
